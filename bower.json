@@ -1,0 +1,20 @@
+{
+    "name": "Fallback-Off-Canvas",
+    "version": "0.1.0",
+    "homepage": "https://github.com/Fall-Back/Off-Canvas",
+    "authors": [
+        "Andy Kirk <andy.kirk@gridlight-design.co.uk>"
+    ],
+    "description": "A simple pattern for CSS only off-canvas panels.",
+    "main": "_off-canvas.scss",
+    "ignore":[],
+    "keywords": [
+        "fallback",
+        "css",
+        "off-canvas"
+    ],
+    "license": "Apache",
+    "dependencies": {
+        "Fallback-Base": "https://github.com/Fall-Back/Fallback-Base"
+    }
+}

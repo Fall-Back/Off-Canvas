@@ -1,0 +1,308 @@
+/*------------------------------------------------------------------------------------------------*\
+    Fallback Search Form Pattern v0.1
+\*------------------------------------------------------------------------------------------------*/
+
+// Colours:
+
+$fallback--off-canvas--bg-color:              #fff !default;
+$fallback--off-canvas__link--color:           #fff !default;
+$fallback--off-canvas__link--color-alt:       #999 !default;
+$fallback--off-canvas__link--bg-color:        #bbb !default;
+
+$fallback--off-canvas__left-panel--bg-color:  #999 !default;
+$fallback--off-canvas__right-panel--bg-color: $fallback--off-canvas__left-panel--bg-color !default;
+
+
+
+
+// Sizes:
+
+$fallback--off-canvas--width:                 260px !default;
+$fallback--off-canvas--spacing:               5px !default;
+$fallback--off-canvas__link--height:          40px !default;
+$fallback--off-canvas__panel--padding:        20px !default;
+
+
+// Breakpoints:
+
+$fallback--off-canvas--breakpoint--enhanced:  720px !default;
+
+
+// SVG's
+
+$fallback--off-canvas__open--svg:             "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMi41IDE1aDE1di0xLjY2N2gtMTV2MS42Njd6TTIuNSAxMC44MzNoMTV2LTEuNjY3aC0xNXYxLjY2N3pNMi41IDV2MS42NjdoMTV2LTEuNjY3aC0xNXoiPjwvcGF0aD48L3N2Zz4=" !default;
+$fallback--off-canvas__close--svg:            "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+" !default;
+
+
+// Fallback PNG's:
+
+$fallback--off-canvas__open--png:            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
+$fallback--off-canvas__close--png:           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
+
+
+// Transitions:
+
+$fallback--off-canvas__panel--transition:     left 0.5s ease !default;
+$fallback--off-canvas__overlay-transition:    opacity 0.5s ease !default;
+
+
+// Other:
+$fallback--off-canvas__overlay-opacity:       0.5 !default;
+$fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
+
+/* -- Basic/fallback layout --------------------------------------------------------------------- */
+
+    /* -- .off-canvas ----------------------------------------------------------------------------*/
+    
+    .off-canvas {  
+    }
+
+    .off-canvas__open,
+    .off-canvas__close {
+        display: none;
+    }
+    
+    /* -------------------------------------------------------------------------------------------*/
+    
+    /* -- .off-canvas__inner ---------------------------------------------------------------------*/
+    
+    .off-canvas__inner {
+        width: 100%;
+        background-color: $fallback--off-canvas--bg-color;
+    }
+
+    
+    
+/* -- Enhanced layout --------------------------------------------------------------------------- */    
+    
+    /*@media only screen and (max-width: 920px) {*/
+    @media only screen and (max-width: ($fallback--off-canvas--breakpoint--enhanced - 1)) {
+        .off-canvas {
+            overflow-x: hidden;
+            height: 100%;
+        }
+        
+        
+        /* This div is responsible for sliding the page: */
+        .off-canvas__inner {
+            min-height: 100%;
+            position: relative;
+            left: 0;
+            /*
+                NOTE: `-webkit-transition` OMITTED DELIBERATLY as it seems to prevent android from
+                moving `.off-canvas__inner` at all and is thus broken.
+                If a simple solution is found I can re-instate it, but not having the transition is
+                only a minor difference - not moving at is unusable.
+            */
+               -moz-transition: $fallback--off-canvas__panel--transition;
+                 -o-transition: $fallback--off-canvas__panel--transition;
+                    transition: $fallback--off-canvas__panel--transition;
+        }       
+        
+        .off-canvas--left:target .off-canvas__inner {
+            left: $fallback--off-canvas--width;
+        }
+
+        .off-canvas--right:target .off-canvas__inner {
+            left: -$fallback--off-canvas--width;
+        }
+        
+        
+        /* Style the off-canvas controls: */
+        
+        /* 
+            NOTE: this still isn't finalised and may need to be more flexible as it's quite
+            subjective how these buttons should be presented in terms of position.
+            Will probably not be in isolation, but as part of a navbar or similar so this does
+            need some more thinking.
+        */
+        
+        .off-canvas__controls--left,
+        .off-canvas__controls--right {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .off-canvas__open,
+        .off-canvas__close {
+            /*display: block;
+            @include fallback-rem(padding, $fallback--off-canvas--spacing);         
+
+            text-align: center;
+            
+            background-color: $fallback--off-canvas__link--bg-color;
+            color: $fallback--off-canvas__link--color;
+            
+            @include fallback-rem(width, $fallback--off-canvas__link--height);
+            @include fallback-rem(height, $fallback--off-canvas__link--height); 
+            @include fallback-rem(line-height, $fallback--off-canvas__link--height);*/
+            
+            
+            background-color: $fallback--off-canvas__link--bg-color;
+            color: $fallback--off-canvas__link--color;
+            @include fallback-rem(width, $fallback--off-canvas__link--height);
+            
+            display: block;
+            margin: 0;
+            @include fallback-rem(padding, 0 ($fallback--off-canvas--spacing * 2));
+            @include fallback-rem(height, $fallback--off-canvas__link--height);
+            @include fallback-rem(line-height, $fallback--off-canvas__link--height);  
+        }
+        
+        
+        
+        
+        /*
+            1. Move the close button to the back and position behind open control.
+            2. This is only necessary if the container is block wider than the control.
+               May not be the best place for this, but it doesn't hurt.
+        */
+        .off-canvas__close {           
+            position: absolute; /* [1] */
+            z-index: -1; /* [1] */
+            top: 0; /* [1] */
+            right: 0; /* [2] */
+        }
+
+        .off-canvas__open:before,
+        .off-canvas__close:before {
+            /* These styles are enough for modern FF to V-center the icon: */
+            content: url($fallback--off-canvas__open--svg);
+            display: inline-block;
+            vertical-align: middle;
+            /* IE10-11 flexbox chokes without width: */
+            @include fallback-rem(width, ($fallback--off-canvas__link--height / 2 ));
+            /* IE11 flexbox stretches icon without height: */
+            @include fallback-rem(height, ($fallback--off-canvas__link--height / 2 ));
+            /* But now blink pushes the icon to the bottom without line-height: 0. */
+            line-height: 0;
+        }
+        
+        .off-canvas__open:before {
+            content: url($fallback--off-canvas__open--svg);   
+        }
+        
+        .off-canvas__close:before {
+            content: url($fallback--off-canvas__close--svg);
+        }
+
+        
+        /* Move the close control on top of the open control and above the overlay: */
+        .off-canvas--left:target .off-canvas__controls--left .off-canvas__close,
+        .off-canvas--right:target .off-canvas__controls--right .off-canvas__close {
+            z-index: 1002; /* @var */
+        }
+ 
+
+        .off-canvas__open:hover,
+        .off-canvas__open:active,
+        .off-canvas__open:focus,
+        .off-canvas__close:hover,
+        .off-canvas__close:active,
+        .off-canvas__close:active {
+            text-decoration: none;
+            background-color: $fallback--off-canvas__link--color-alt;
+        }
+        
+        
+        /* Size and position the overlay, but send it to the back: */
+        
+        .off-canvas__overlay {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            opacity: 0;
+            
+            -webkit-transition: $fallback--off-canvas__overlay-transition;
+               -moz-transition: $fallback--off-canvas__overlay-transition;
+                 -o-transition: $fallback--off-canvas__overlay-transition;
+                    transition: $fallback--off-canvas__overlay-transition;
+                    
+            -webkit-box-shadow: $fallback--off-canvas__overlay-shadow;
+                    box-shadow: $fallback--off-canvas__overlay-shadow;
+        }
+        
+        /* Bring the overlay to the front and fade in when there's an off-canvas target: */
+        .off-canvas:target .off-canvas__overlay {
+            z-index: 1001; /* @var */
+            opacity: $fallback--off-canvas__overlay-opacity;
+        }
+        
+        
+        /* Size and position the off-canvas panels: */
+        
+        .off-canvas__panel--left,
+        .off-canvas__panel--right {
+            position: absolute;
+            top: 0;
+            @include fallback-rem(width, $fallback--off-canvas--width);
+            @include fallback-rem(padding, $fallback--off-canvas__panel--padding);
+            
+            -webkit-box-sizing: border-box;
+            
+            
+        }
+        
+        .off-canvas__panel--left {
+            left: -$fallback--off-canvas--width;
+            background-color: $fallback--off-canvas__left-panel--bg-color;
+        }
+        
+        .off-canvas__panel--right {
+            right: -$fallback--off-canvas--width;
+            background-color: $fallback--off-canvas__right-panel--bg-color;
+        }
+    }
+    
+    
+    /* Old Android hack (also affects Safari 4 it doesn't matter in this case): */
+    /* (adapted from http://browserhacks.com/#hack-a60b03e301a67f76a5a22221c739dc64) */
+    @media screen and (min-width:0\-) {
+        /*
+            Overflow breaks scrolling in old Android, so just allow horizontal scrolling as well.
+        */
+        .off-canvas {       
+            overflow: visible;
+        }
+        
+        /*
+            PNG Fallback for Old Android.
+            (IE8- (and other non-SVG browsers) don't really need the off canvas anyway, and in the 
+            case of IE8- will never encounter it due to lack of Media Query support)
+            (--Actually, with Respond it will so could turn PNG Fallback into a mixin to allow it to
+            be used fore IE8 if necessary, but advise to use a min-width instead - if Respond will
+            allow this---). NO! It relies on :target so can't work in IE without JS fallback.
+            Can't see that this is worth it so only use min-width.
+
+            (leaving SVG for reference for now)
+        */
+        .off-canvas__open {
+            background-image: url($fallback--off-canvas__open--png);
+            -background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTIuNSAxNWgxNXYtMS42NjdoLTE1djEuNjY3ek0yLjUgMTAuODMzaDE1di0xLjY2N2gtMTV2MS42Njd6TTIuNSA1djEuNjY3aDE1di0xLjY2N2gtMTV6Ij48L3BhdGg+Cjwvc3ZnPgo=);
+        }
+        .off-canvas__close {           
+            background-image: url($fallback--off-canvas__close--png);    
+            -background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+Cjwvc3ZnPgo=);    
+        }
+    }
+    
+    
+    /* For Opera Mini and Mobile (affects old desktop too, but that's acceptable): */
+    /* (http://browserhacks.com/#hack-a3f166304aafed524566bc6814e1d5c7
+       for Opera ≥ 9.5 but recent desktop Opera (15+) isn't affected) */
+    
+    /*
+        Overflow breaks scrolling in Opera Mini, so just allow horizontal scrolling as well.
+    */
+    _:-o-prefocus, body:last-child .off-canvas {
+        overflow: visible;
+    }
+
+/* ---------------------------------------------------------------------------------------------- */
