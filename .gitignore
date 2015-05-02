@@ -2,3 +2,4 @@
 bower_components/
 off-canvas.css
 off-canvas.scss
+*.css.map
