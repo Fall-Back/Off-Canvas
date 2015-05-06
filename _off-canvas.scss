@@ -20,7 +20,8 @@ $fallback--off-canvas__right-panel--bg-color: $fallback--off-canvas__left-panel-
 $fallback--off-canvas--width:                 260px !default;
 $fallback--off-canvas--spacing:               5px !default;
 $fallback--off-canvas__link--height:          40px !default;
-$fallback--off-canvas__panel--padding:        20px !default;
+$fallback--off-canvas__left-panel--padding:   20px !default;
+$fallback--off-canvas__right-panel--padding:  $fallback--off-canvas__left-panel--padding !default;
 
 
 // Breakpoints:
@@ -36,8 +37,8 @@ $fallback--off-canvas__close--svg:            "data:image/svg+xml;base64,PHN2ZyB
 
 // Fallback PNG's:
 
-$fallback--off-canvas__open--png:            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
-$fallback--off-canvas__close--png:           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
+$fallback--off-canvas__open--png:             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
+$fallback--off-canvas__close--png:            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
 
 
 // Transitions:
@@ -146,9 +147,16 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             margin: 0;
             @include fallback-rem(padding, 0 ($fallback--off-canvas--spacing * 2));
             @include fallback-rem(height, $fallback--off-canvas__link--height);
-            @include fallback-rem(line-height, $fallback--off-canvas__link--height);  
+            @include fallback-rem(line-height, $fallback--off-canvas__link--height);
         }
         
+        /*
+            Fix for Opera Mini vertical centering:
+        */
+        _:-o-prefocus, body:last-child .off-canvas__open,
+        _:-o-prefocus, body:last-child .off-canvas__close {
+            line-height: 2.8 !important;
+        }
         
         
         
@@ -243,21 +251,20 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             position: absolute;
             top: 0;
             @include fallback-rem(width, $fallback--off-canvas--width);
-            @include fallback-rem(padding, $fallback--off-canvas__panel--padding);
             
             -webkit-box-sizing: border-box;
-            
-            
         }
         
         .off-canvas__panel--left {
             left: -$fallback--off-canvas--width;
             background-color: $fallback--off-canvas__left-panel--bg-color;
+            @include fallback-rem(padding, $fallback--off-canvas__left-panel--padding);
         }
         
         .off-canvas__panel--right {
             right: -$fallback--off-canvas--width;
             background-color: $fallback--off-canvas__right-panel--bg-color;
+            @include fallback-rem(padding, $fallback--off-canvas__right-panel--padding);
         }
     }
     
