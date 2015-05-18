@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------------------*\
-    FallBack Search Form Pattern v0.1
+    Fall-Back Search Form Pattern v0.1
 \*------------------------------------------------------------------------------------------------*/
 
 // Colours:
@@ -35,7 +35,7 @@ $fallback--off-canvas__open--svg:             "data:image/svg+xml;base64,PHN2ZyB
 $fallback--off-canvas__close--svg:            "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+" !default;
 
 
-// FallBack PNG's:
+// Fall-Back PNG's:
 
 $fallback--off-canvas__open--png:             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
 $fallback--off-canvas__close--png:            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
@@ -280,10 +280,10 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         }
         
         /*
-            PNG FallBack for Old Android.
+            PNG Fall-Back for Old Android.
             (IE8- (and other non-SVG browsers) don't really need the off canvas anyway, and in the 
             case of IE8- will never encounter it due to lack of Media Query support)
-            (--Actually, with Respond it will so could turn PNG FallBack into a mixin to allow it to
+            (--Actually, with Respond it will so could turn PNG Fall-Back into a mixin to allow it to
             be used fore IE8 if necessary, but advise to use a min-width instead - if Respond will
             allow this---). NO! It relies on :target so can't work in IE without JS fallback.
             Can't see that this is worth it so only use min-width.
