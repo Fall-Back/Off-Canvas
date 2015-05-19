@@ -121,7 +121,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         .off-canvas__controls--left,
         .off-canvas__controls--right {
             display: inline-block;
-            position: relative;
+            /*position: relative; - appears to not be needed. Maybe flex item causes same effect. Keep for now.*/
         }
         
         .off-canvas__open,
@@ -175,7 +175,6 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         .off-canvas__open:before,
         .off-canvas__close:before {
             /* These styles are enough for modern FF to V-center the icon: */
-            content: url($fallback--off-canvas__open--svg);
             display: inline-block;
             vertical-align: middle;
             /* IE10-11 flexbox chokes without width: */
