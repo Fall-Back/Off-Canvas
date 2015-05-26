@@ -251,7 +251,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             top: 0;
             @include fallback-rem(width, $fallback--off-canvas--width);
             
-            -webkit-box-sizing: border-box;
+            -webkit-box-sizing: border-box; /* Not sure why this is needed. */
         }
         
         .off-canvas__panel--left {
