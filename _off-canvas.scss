@@ -121,7 +121,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         .off-canvas__controls--left,
         .off-canvas__controls--right {
             display: inline-block;
-            /*position: relative; - appears to not be needed. Maybe flex item causes same effect. Keep for now.*/
+            position: relative; /* IS needed for when used outside of top-bar. */
         }
         
         .off-canvas__open,
