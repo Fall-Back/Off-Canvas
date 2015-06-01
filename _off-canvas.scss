@@ -5,9 +5,11 @@
 // Colours:
 
 $fallback--off-canvas--bg-color:              #fff !default;
+
 $fallback--off-canvas__link--color:           #fff !default;
-$fallback--off-canvas__link--color-alt:       #999 !default;
+$fallback--off-canvas__link--color-alt:       $fallback--off-canvas__link--color !default;
 $fallback--off-canvas__link--bg-color:        #bbb !default;
+$fallback--off-canvas__link--bg-color-alt:    #999 !default;
 
 $fallback--off-canvas__left-panel--bg-color:  #999 !default;
 $fallback--off-canvas__right-panel--bg-color: $fallback--off-canvas__left-panel--bg-color !default;
@@ -125,22 +127,10 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         }
         
         .off-canvas__open,
-        .off-canvas__close {
-            /*display: block;
-            @include fallback-rem(padding, $fallback--off-canvas--spacing);         
-
-            text-align: center;
-            
-            background-color: $fallback--off-canvas__link--bg-color;
+        .off-canvas__close {          
             color: $fallback--off-canvas__link--color;
-            
-            @include fallback-rem(width, $fallback--off-canvas__link--height);
-            @include fallback-rem(height, $fallback--off-canvas__link--height); 
-            @include fallback-rem(line-height, $fallback--off-canvas__link--height);*/
-            
-            
             background-color: $fallback--off-canvas__link--bg-color;
-            color: $fallback--off-canvas__link--color;
+            
             @include fallback-rem(width, $fallback--off-canvas__link--height);
             
             display: block;
@@ -208,7 +198,8 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         .off-canvas__close:active,
         .off-canvas__close:active {
             text-decoration: none;
-            background-color: $fallback--off-canvas__link--color-alt;
+            color: $fallback--off-canvas__link--color-alt;
+            background-color: $fallback--off-canvas__link--bg-color-alt;
         }
         
         
