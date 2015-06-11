@@ -20,9 +20,9 @@ $fallback--off-canvas--ui-color:              $t !default;
 $fallback--off-canvas--bg-color:              #fff !default;
 
 $fallback--off-canvas__link--color:           #fff !default;
-$fallback--off-canvas__link--color-alt:       $fallback--off-canvas__link--color !default;
+$fallback--off-canvas__link--color--alt:      $fallback--off-canvas__link--color !default;
 $fallback--off-canvas__link--bg-color:        $fallback--off-canvas--ui-color !default;
-$fallback--off-canvas__link--bg-color-alt:    darken($fallback--off-canvas--ui-color, 10%) !default;
+$fallback--off-canvas__link--bg-color--alt:   darken($fallback--off-canvas--ui-color, 10%) !default;
 
 $fallback--off-canvas__left-panel--bg-color:  $fallback--base-ui-color !default;
 $fallback--off-canvas__right-panel--bg-color: $fallback--off-canvas__left-panel--bg-color !default;
@@ -211,8 +211,8 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         .off-canvas__close:active,
         .off-canvas__close:active {
             text-decoration: none;
-            color: $fallback--off-canvas__link--color-alt;
-            background-color: $fallback--off-canvas__link--bg-color-alt;
+            color: $fallback--off-canvas__link--color--alt;
+            background-color: $fallback--off-canvas__link--bg-color--alt;
         }
         
         
