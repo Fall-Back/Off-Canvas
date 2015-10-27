@@ -94,6 +94,16 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
     
     /*@media only screen and (max-width: 920px) {*/
     @media only screen and (max-width: ($fallback--off-canvas--breakpoint--enhanced - 1)) {
+
+        /*
+            It's not uncommon to force a scrollbar on html to avoid jarring width adjustments.
+            However, we're applying a scrollbar to .off-canvas so it's possible to end up with two
+            scrollbars at this breakpoint which looks terrible, so forcing an override here.
+        */
+        html {
+            overflow-y: auto !important;
+        }
+    
         .off-canvas {
             overflow-x: hidden;
             height: 100%;
