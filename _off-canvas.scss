@@ -33,7 +33,7 @@ $fallback--off-canvas__overlay--bg-color:     #fff !default;
 // Sizes:
 
 $fallback--off-canvas--width:                 16em !default;
-$fallback--off-canvas__link--height:          ($fallback--base-em-ratio * 2em) !default;
+$fallback--off-canvas__link--height:          ($fallback--base-em-ratio * 1.5em) !default;
 $fallback--off-canvas--spacing:               ($fallback--off-canvas__link--height / 8) !default;
 
 $fallback--off-canvas__left-panel--padding:   ($fallback--off-canvas__link--height / 2) !default;
@@ -67,15 +67,28 @@ $fallback--off-canvas__overlay-transition:    opacity 0.5s ease !default;
 $fallback--off-canvas__overlay-opacity:       0.5 !default;
 $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
 
+
+// MQ hacks:
+// https://jeffclayton.wordpress.com/2014/07/22/internet-explorer-css-hacks-collection/
+// 0\0 encoded to preserve hack.
+$fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution: .001dpcm)" !default;
+
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
     /* -- .off-canvas ----------------------------------------------------------------------------*/
     
     .off-canvas {  
     }
 
-    .off-canvas__open,
-    .off-canvas__close {
+    .off-canvas .off-canvas__open,
+    .off-canvas .off-canvas__close {
         display: none;
     }
     
@@ -83,7 +96,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
     
     /* -- .off-canvas__inner ---------------------------------------------------------------------*/
     
-    .off-canvas__inner {
+    .off-canvas .off-canvas__inner {
         width: 100%;
         background-color: $fallback--off-canvas--bg-color;
     }
@@ -106,12 +119,13 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
     
         .off-canvas {
             overflow-x: hidden;
+            overflow-y: scroll; // Maybe make this optional?
             height: 100%;
         }
         
         
         /* This div is responsible for sliding the page: */
-        .off-canvas__inner {
+        .off-canvas .off-canvas__inner {
             min-height: 100%;
             position: relative;
             left: 0;
@@ -144,14 +158,14 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             need some more thinking.
         */
         
-        .off-canvas__controls--left,
-        .off-canvas__controls--right {
+        .off-canvas .off-canvas__controls--left,
+        .off-canvas .off-canvas__controls--right {
             display: inline-block;
             position: relative; /* IS needed for when used outside of top-bar. */
         }
         
-        .off-canvas__open,
-        .off-canvas__close {          
+        .off-canvas .off-canvas__open,
+        .off-canvas .off-canvas__close {          
             color: $fallback--off-canvas__link--color;
             background-color: $fallback--off-canvas__link--bg-color;
             width: $fallback--off-canvas__link--height;
@@ -162,7 +176,18 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             height: $fallback--off-canvas__link--height;
             line-height: $fallback--off-canvas__link--height;
             
+            border: 0;
+            
             text-align: center;
+        }
+        
+        .off-canvas .off-canvas__open:hover,
+        .off-canvas .off-canvas__open:active,
+        .off-canvas .off-canvas__open:focus,
+        .off-canvas .off-canvas__close:hover,
+        .off-canvas .off-canvas__close:active,
+        .off-canvas .off-canvas__close:focus {
+            border: 0;
         }
         
         /*
@@ -178,7 +203,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         /*
             1. Move the close button to the back and position behind open control.
         */
-        .off-canvas__close {           
+        .off-canvas .off-canvas__close {           
             position: absolute; /* [1] */
             z-index: -1; /* [1] */
             top: 0; /* [1] */
@@ -188,7 +213,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             1. This is only necessary if the container is block wider than the control.
                May not be the best place for this, but it doesn't hurt.
         */
-        .off-canvas__controls--left .off-canvas__close {
+        .off-canvas .off-canvas__controls--left .off-canvas__close {
             left: 0; /* [2] */
         }
         
@@ -196,12 +221,12 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             1. This is only necessary if the container is block wider than the control.
                May not be the best place for this, but it doesn't hurt.
         */
-        .off-canvas__controls--right .off-canvas__close {
+        .off-canvas .off-canvas__controls--right .off-canvas__close {
             right: 0; /* [2] */
         }
 
-        .off-canvas__open:before,
-        .off-canvas__close:before {
+        .off-canvas .off-canvas__open::before,
+        .off-canvas .off-canvas__close::before {
             /* These styles are enough for modern FF to V-center the icon: */
             display: inline-block;
             vertical-align: middle;
@@ -210,11 +235,11 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             line-height: 0;
         }
         
-        .off-canvas__open:before {
+        .off-canvas .off-canvas__open::before {
             content: url($fallback--off-canvas__open--svg);   
         }
         
-        .off-canvas__close:before {
+        .off-canvas .off-canvas__close::before {
             content: url($fallback--off-canvas__close--svg);
         }
 
@@ -226,12 +251,12 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         }
  
 
-        .off-canvas__open:hover,
-        .off-canvas__open:active,
-        .off-canvas__open:focus,
-        .off-canvas__close:hover,
-        .off-canvas__close:active,
-        .off-canvas__close:active {
+        .off-canvas .off-canvas__open:hover,
+        .off-canvas .off-canvas__open:active,
+        .off-canvas .off-canvas__open:focus,
+        .off-canvas .off-canvas__close:hover,
+        .off-canvas .off-canvas__close:active,
+        .off-canvas .off-canvas__close:active {
             text-decoration: none;
             color: $fallback--off-canvas__link--color--alt;
             background-color: $fallback--off-canvas__link--bg-color--alt;
@@ -240,7 +265,7 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         
         /* Size and position the overlay, but send it to the back: */
         
-        .off-canvas__overlay {
+        .off-canvas .off-canvas__overlay {
             content: "";
             position: absolute;
             z-index: -1;
@@ -263,7 +288,8 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         }
         
         /* Bring the overlay to the front and fade in when there's an off-canvas target: */
-        .off-canvas:target .off-canvas__overlay {
+        .off-canvas--left:target .off-canvas__overlay,
+        .off-canvas--right:target .off-canvas__overlay {
             z-index: 1001; /* @var */
             opacity: $fallback--off-canvas__overlay-opacity;
         }
@@ -271,8 +297,8 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
         
         /* Size and position the off-canvas panels: */
         
-        .off-canvas__panel--left,
-        .off-canvas__panel--right {
+        .off-canvas .off-canvas__panel--left,
+        .off-canvas .off-canvas__panel--right {
             position: absolute;
             top: 0;
             width: $fallback--off-canvas--width;
@@ -280,18 +306,32 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
             -webkit-box-sizing: border-box; /* Not sure why this is needed. */
         }
         
-        .off-canvas__panel--left {
+        .off-canvas .off-canvas__panel--left {
             left: -$fallback--off-canvas--width;
             background-color: $fallback--off-canvas__left-panel--bg-color;
             padding: $fallback--off-canvas__left-panel--padding;
         }
         
-        .off-canvas__panel--right {
+        .off-canvas .off-canvas__panel--right {
             right: -$fallback--off-canvas--width;
             background-color: $fallback--off-canvas__right-panel--bg-color;
             padding: $fallback--off-canvas__right-panel--padding;
         }
     }
+    
+    
+    /* IE9 hacks: */
+    /*
+    */
+    @media #{$fallback--ie9--hack} {
+        .off-canvas .off-canvas__open::before,
+        .off-canvas .off-canvas__close::before {
+            /* Increase icon width due to odd cropping, then rescale down: */
+            width: 1rem;
+            -ms-transform: scale(0.9);
+        }
+    }
+    
     
     
     /* Old Android hack (also affects Safari 4 it doesn't matter in this case): */
@@ -315,11 +355,11 @@ $fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
 
             (leaving SVG for reference for now)
         */
-        .off-canvas__open {
+        .off-canvas .off-canvas__open {
             background-image: url($fallback--off-canvas__open--png);
             -background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTIuNSAxNWgxNXYtMS42NjdoLTE1djEuNjY3ek0yLjUgMTAuODMzaDE1di0xLjY2N2gtMTV2MS42Njd6TTIuNSA1djEuNjY3aDE1di0xLjY2N2gtMTV6Ij48L3BhdGg+Cjwvc3ZnPgo=);
         }
-        .off-canvas__close {           
+        .off-canvas .off-canvas__close {           
             background-image: url($fallback--off-canvas__close--png);    
             -background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KPHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+Cjwvc3ZnPgo=);    
         }
