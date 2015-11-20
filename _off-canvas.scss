@@ -102,6 +102,12 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
     }
 
     
+    .off-canvas .off-canvas__overlay {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+    
     
 /* -- Enhanced layout --------------------------------------------------------------------------- */    
     
@@ -275,6 +281,7 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             bottom: 0;
             width: 100%;
             height: 100%;
+
             background: $fallback--off-canvas__overlay--bg-color;
             opacity: 0;
             
