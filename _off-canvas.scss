@@ -259,7 +259,7 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             content: url($fallback--off-canvas__close--svg);
         }*/
 
-        /* TUrn off the open control: */
+        /* Turn off the open control: */
         .off-canvas--left:target .off-canvas__controls--left .off-canvas__open,
         .off-canvas--right:target .off-canvas__controls--right .off-canvas__open {
             display: none;
