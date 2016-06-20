@@ -1,54 +1,88 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
     Fall-Back Off Canvas Pattern v1.0.0
-    
+
     Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
     
+    Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
+    This allows Start-CSS declarations to be overidden.
+    E.g. `.{patten}__open.{patten}__open` overrides `a[href]`.
+
 \*------------------------------------------------------------------------------------------------*/
 
-// Colours:
+/*------------------------------------------------------------------------------------------------*\
+    Import Fall-Back vars:
 
-// Slightly hacky way of allowing the main UI colour of this pattern to be:
-// - base-ui colour (if set)
-// - otherwise #999
-// - but can be specifically overridden
+    Slightly hacky way of allowing the main UI colour of this pattern to be:
+     - base-ui colour (if set)
+     - otherwise #999
+     - but can be specifically overridden
+\*------------------------------------------------------------------------------------------------*/
 $t: #999;
 @if variable-exists(fallback--base-ui-color) {
     $t: $fallback--base-ui-color;
 }
 $fallback--off-canvas--ui-color:              $t !default;
 
+// Do the same for the base text colour: ...
+$t: #333;
+@if variable-exists(fallback--base-text-color) {
+    $t: $fallback--base-text-color;
+}
+$fallback--off-canvas--text-color:            $t !default;
 
-$fallback--off-canvas--bg-color:              #fff !default;
+// ... and the background colour:
+$t: #333;
+@if variable-exists(fallback--base-background-color) {
+    $t: $fallback--base-background-color;
+}
+$fallback--off-canvas--bg-color:              $t !default;
+/*------------------------------------------------------------------------------------------------*/
 
-$fallback--off-canvas__link--color:           #fff !default;
-$fallback--off-canvas__link--color--alt:      $fallback--off-canvas__link--color !default;
-$fallback--off-canvas__link--bg-color:        $fallback--off-canvas--ui-color !default;
-$fallback--off-canvas__link--bg-color--alt:   darken($fallback--off-canvas--ui-color, 10%) !default;
 
-$fallback--off-canvas__left-panel--color:     #fff !default;
-$fallback--off-canvas__left-panel--bg-color:  $fallback--base-ui-color !default;
-$fallback--off-canvas__right-panel--color:    $fallback--off-canvas__left-panel--color !default;
-$fallback--off-canvas__right-panel--bg-color: $fallback--off-canvas__left-panel--bg-color !default;
+// Colours:
 
-$fallback--off-canvas__overlay--bg-color:     #fff !default;
+$fallback--off-canvas--text-color:             $fallback--off-canvas--text-color !default;
+$fallback--off-canvas--bg-color:               $fallback--off-canvas--bg-color !default;
+
+
+$fallback--off-canvas__link--color:            lighten($fallback--off-canvas--ui-color, 55%) !default;
+$fallback--off-canvas__link--color--alt:       lighten($fallback--off-canvas--ui-color, 35%) !default;
+$fallback--off-canvas__link--bg-color:         transparent !default;
+$fallback--off-canvas__link--bg-color--alt:    $fallback--off-canvas--ui-color !default;
+
+
+$fallback--off-canvas__control--color:         #fff !default;
+$fallback--off-canvas__control--color--alt:    $fallback--off-canvas__control--color !default;
+$fallback--off-canvas__control--bg-color:      $fallback--off-canvas--ui-color !default;
+$fallback--off-canvas__control--bg-color--alt: darken($fallback--off-canvas--ui-color, 10%) !default;
+
+
+$fallback--off-canvas__left-panel--color:      #fff !default;
+$fallback--off-canvas__left-panel--bg-color:   $fallback--base-ui-color !default;
+
+$fallback--off-canvas__right-panel--color:     $fallback--off-canvas__left-panel--color !default;
+$fallback--off-canvas__right-panel--bg-color:  $fallback--off-canvas__left-panel--bg-color !default;
+
+
+$fallback--off-canvas__overlay--bg-color:      #fff !default;
 
 
 // Sizes:
 
-$fallback--off-canvas--width:                 16em !default;
-$fallback--off-canvas__link--height:          ($fallback--base-em-ratio * 1.5em) !default;
-$fallback--off-canvas--spacing:               ($fallback--off-canvas__link--height / 8) !default;
+$fallback--off-canvas--width:                  16em !default;
+$fallback--off-canvas__control--height:        ($fallback--base-em-ratio * 1.5em) !default;
+$fallback--off-canvas--spacing:                ($fallback--off-canvas__control--height / 8) !default;
 
-$fallback--off-canvas__left-panel--padding:   ($fallback--off-canvas__link--height / 2) !default;
-$fallback--off-canvas__right-panel--padding:  $fallback--off-canvas__left-panel--padding !default;
+$fallback--off-canvas__left-panel--padding:    ($fallback--off-canvas__control--height / 2) !default;
+$fallback--off-canvas__right-panel--padding:   $fallback--off-canvas__left-panel--padding !default;
 
 
 // Breakpoints:
 
-$fallback--off-canvas--breakpoint--enhanced:  50em !default;
+$fallback--off-canvas--breakpoint--enhanced:   50em !default;
 //$fallback--off-canvas--breakpoint--enhanced:  720px !default;
 
 
@@ -60,19 +94,19 @@ $fallback--off-canvas--breakpoint--enhanced:  50em !default;
 
 // Fall-Back PNG's:
 
-$fallback--off-canvas__open--png:             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
-$fallback--off-canvas__close--png:            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
+$fallback--off-canvas__open--png:              "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4jWNgGAWDF/z//7/+P/mgHpuBAf///59PJg4YgDCgFPz//7/g////98nEBbQ3cPADqieb/9RO2KNg8AAAUSBpmHUw8UMAAAAASUVORK5CYII=" !default;
+$fallback--off-canvas__close--png:             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4je2TOw6FMAwEKTgAEgWRkKi5awqah1IgTpBDDgVbRMAj5lOyXWJ75LWTovj0ugAHeKA8ySmV4yxAz6p4BBUsKsdbgA0wquAH1EmsAgbFZqDLAg+6iDrv7kywE+h92B/oM5iA6cwAgmmzhu6eWX51KRubE9AmMSfbdvtJgeVhBwuwFzT39QLQZ4GfLmsBYGJNnHhD1RcAAAAASUVORK5CYII=" !default;
 
 
 // Transitions:
 
-$fallback--off-canvas__panel--transition:     left 0.5s ease !default;
-$fallback--off-canvas__overlay-transition:    opacity 0.5s ease !default;
+$fallback--off-canvas__panel--transition:      left 0.5s ease !default;
+$fallback--off-canvas__overlay-transition:     opacity 0.5s ease !default;
 
 
 // Other:
-$fallback--off-canvas__overlay-opacity:       0.5 !default;
-$fallback--off-canvas__overlay-shadow:        0 0 10px 5px #000 !default;
+$fallback--off-canvas__overlay-opacity:        0.5 !default;
+$fallback--off-canvas__overlay-shadow:         0 0 10px 5px #000 !default;
 
 
 // MQ hacks:
@@ -94,8 +128,8 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
     .off-canvas {
     }
 
-    .off-canvas .off-canvas__open,
-    .off-canvas .off-canvas__close {
+    .off-canvas__open,
+    .off-canvas__close {
         display: none;
     }
 
@@ -105,14 +139,16 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
 
     .off-canvas .off-canvas__inner {
         width: 100%;
+
+        // I can't remember why this was necessary: ...
         background-color: $fallback--off-canvas--bg-color;
+        //... but it should be accompanied by a color setting:
+        color: $fallback--off-canvas--text-color;
     }
 
 
-    .off-canvas .off-canvas__overlay {
-        padding: 0;
-        margin: 0;
-        border: 0;
+    .off-canvas__overlay {
+        display: none;
     }
 
 
@@ -137,7 +173,7 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
 
 
         /* This div is responsible for sliding the page: */
-        .off-canvas .off-canvas__inner {
+        .off-canvas__inner {
             min-height: 100%;
             position: relative;
             left: 0;
@@ -165,49 +201,53 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
 
         /*
             NOTE: this still isn't finalised and may need to be more flexible as it's quite
-            subjective how these buttons should be presented in terms of position.
+            subjective how these controls should be presented in terms of position.
             Will probably not be in isolation, but as part of a navbar or similar so this does
             need some more thinking.
         */
 
-        .off-canvas .off-canvas__controls--left,
-        .off-canvas .off-canvas__controls--right {
+        .off-canvas__controls--left.off-canvas__controls--left,
+        .off-canvas__controls--right.off-canvas__controls--right {
             display: inline-block;
             position: relative; /* IS needed for when used outside of top-bar. */
         }
 
-        .off-canvas .off-canvas__open,
-        .off-canvas .off-canvas__close {
-            color: $fallback--off-canvas__link--color;
-            background-color: $fallback--off-canvas__link--bg-color;
-            width: $fallback--off-canvas__link--height;
+        .off-canvas__open.off-canvas__open,
+        .off-canvas__close.off-canvas__close {
+            color: $fallback--off-canvas__control--color;
+            background-color: $fallback--off-canvas__control--bg-color;
+            width: $fallback--off-canvas__control--height;
 
-            -display: block;
             margin: 0;
             padding: 0 ($fallback--off-canvas--spacing * 2);
-            height: $fallback--off-canvas__link--height;
-            line-height: $fallback--off-canvas__link--height;
+            height: $fallback--off-canvas__control--height;
+            line-height: $fallback--off-canvas__control--height;
 
             border: 0;
+            text-decoration: none;
 
             text-align: center;
         }
 
-        .off-canvas .off-canvas__open {
+
+        .off-canvas__open.off-canvas__open:hover,
+        .off-canvas__open.off-canvas__open:active,
+        .off-canvas__open.off-canvas__open:focus,
+        .off-canvas__close.off-canvas__close:hover,
+        .off-canvas__close.off-canvas__close:active,
+        .off-canvas__close.off-canvas__close:focus {
+            border: 0;
+            text-decoration: none;
+            color: $fallback--off-canvas__control--color--alt;
+            background-color: $fallback--off-canvas__control--bg-color--alt;
+        }
+
+        .off-canvas__open.off-canvas__open {
             display: block;
         }
 
-        .off-canvas .off-canvas__open:hover,
-        .off-canvas .off-canvas__open:active,
-        .off-canvas .off-canvas__open:focus,
-        .off-canvas .off-canvas__close:hover,
-        .off-canvas .off-canvas__close:active,
-        .off-canvas .off-canvas__close:focus {
-            border: 0;
-        }
-
         /*
-            Fix for Opera Mini vertical centering:
+            Hack for Opera Mini vertical centering:
         */
         _:-o-prefocus, body:last-child .off-canvas__open,
         _:-o-prefocus, body:last-child .off-canvas__close {
@@ -215,21 +255,11 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
         }
 
 
-
-        /*
-            1. Move the close button to the back and position behind open control.
-        */
-        //.off-canvas .off-canvas__close {
-        //    position: absolute; /* [1] */
-        //    z-index: -1; /* [1] */
-        //    top: 0; /* [1] */
-        //}
-
         /*
             1. This is only necessary if the container is block wider than the control.
                May not be the best place for this, but it doesn't hurt.
         */
-        .off-canvas .off-canvas__controls--left .off-canvas__close {
+        .off-canvas__controls--left .off-canvas__close {
             left: 0; /* [2] */
         }
 
@@ -237,35 +267,16 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             1. This is only necessary if the container is block wider than the control.
                May not be the best place for this, but it doesn't hurt.
         */
-        .off-canvas .off-canvas__controls--right .off-canvas__close {
+        .off-canvas__controls--right .off-canvas__close {
             right: 0; /* [2] */
         }
 
-        /*.off-canvas .off-canvas__open::before,
-        .off-canvas .off-canvas__close::before {
-            // These styles are enough for modern FF to V-center the icon:
-            display: inline-block;
-            vertical-align: middle;
-            width: $fallback--off-canvas--spacing * 3;
 
-            line-height: 0;
-        }
-
-        .off-canvas .off-canvas__open::before {
-            content: url($fallback--off-canvas__open--svg);
-        }
-
-        .off-canvas .off-canvas__close::before {
-            content: url($fallback--off-canvas__close--svg);
-        }*/
-
-        /* Turn off the open control: */
+        /* Hide the open control: */
         .off-canvas--left:target .off-canvas__controls--left .off-canvas__open,
         .off-canvas--right:target .off-canvas__controls--right .off-canvas__open {
             display: none;
         }
-
-
 
         /* Show the close control and move on above the overlay: */
         .off-canvas--left:target .off-canvas__controls--left .off-canvas__close,
@@ -276,22 +287,10 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
         }
 
 
-        .off-canvas .off-canvas__open:hover,
-        .off-canvas .off-canvas__open:active,
-        .off-canvas .off-canvas__open:focus,
-        .off-canvas .off-canvas__close:hover,
-        .off-canvas .off-canvas__close:active,
-        .off-canvas .off-canvas__close:active {
-            text-decoration: none;
-            color: $fallback--off-canvas__link--color--alt;
-            background-color: $fallback--off-canvas__link--bg-color--alt;
-        }
-
-
         /* Size and position the overlay, but send it to the back: */
 
-        .off-canvas .off-canvas__overlay {
-            content: "";
+        .off-canvas__overlay.off-canvas__overlay {
+            display: block;
             position: absolute;
             z-index: -1;
             left: 0;
@@ -300,6 +299,11 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             bottom: 0;
             width: 100%;
             height: 100%;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            text-decoration: none;
+
 
             background: $fallback--off-canvas__overlay--bg-color;
             opacity: 0;
@@ -320,11 +324,18 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             opacity: $fallback--off-canvas__overlay-opacity;
         }
 
+        .off-canvas__overlay.off-canvas__overlay:hover,
+        .off-canvas__overlay.off-canvas__overlay:active,
+        .off-canvas__overlay.off-canvas__overlay:focus {
+            border: 0;
+            text-decoration: none;
+            background: $fallback--off-canvas__overlay--bg-color;
+        }
 
         /* Size and position the off-canvas panels: */
 
-        .off-canvas .off-canvas__panel--left,
-        .off-canvas .off-canvas__panel--right {
+        .off-canvas__panel--left,
+        .off-canvas__panel--right {
             position: absolute;
             top: 0;
             width: $fallback--off-canvas--width;
@@ -332,18 +343,34 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
             /*-webkit-box-sizing: border-box; /* Not sure why this is needed. */
         }
 
-        .off-canvas .off-canvas__panel--left {
+        .off-canvas__panel--left {
             left: -$fallback--off-canvas--width;
             color: $fallback--off-canvas__left-panel--color;
             background-color: $fallback--off-canvas__left-panel--bg-color;
             padding: $fallback--off-canvas__left-panel--padding;
         }
 
-        .off-canvas .off-canvas__panel--right {
+        .off-canvas__panel--right {
             right: -$fallback--off-canvas--width;
             color: $fallback--off-canvas__right-panel--color;
             background-color: $fallback--off-canvas__right-panel--bg-color;
             padding: $fallback--off-canvas__right-panel--padding;
+        }
+
+        .off-canvas__panel--left a,
+        .off-canvas__panel--right a {
+            background-color: $fallback--off-canvas__link--bg-color;
+            color: $fallback--off-canvas__link--color;
+        }
+
+        .off-canvas__panel--left a:hover,
+        .off-canvas__panel--left a:active,
+        .off-canvas__panel--left a:focus,
+        .off-canvas__panel--right a:hover,
+        .off-canvas__panel--right a:active,
+        .off-canvas__panel--right a:focus {
+            background-color: $fallback--off-canvas__link--bg-color--alt;
+            color: $fallback--off-canvas__link--color--alt;
         }
     }
 
@@ -396,10 +423,9 @@ $fallback--ie9--hack: "all and (min-width: \0030\005C\0030) and (min-resolution:
 
     /* For Opera Mini and Mobile (affects old desktop too, but that's acceptable): */
     /* (http://browserhacks.com/#hack-a3f166304aafed524566bc6814e1d5c7
-       for Opera ≥ 9.5 but recent desktop Opera (15+) isn't affected) */
+       for Opera ≥ 9.5 but recent desktop Opera (15+) isn't affected)
 
-    /*
-        Overflow breaks scrolling in Opera Mini, so just allow horizontal scrolling as well.
+       Overflow breaks scrolling in Opera Mini, so just allow horizontal scrolling as well.
     */
     _:-o-prefocus, body:last-child .off-canvas {
         overflow: visible;
