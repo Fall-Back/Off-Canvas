@@ -9,6 +9,11 @@
     Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
     This allows Start-CSS declarations to be overidden.
     E.g. `.{patten}__open.{patten}__open` overrides `a[href]`.
+    
+    KNOWN ISSUES
+    
+    1. The overlay isn't great - it's only as high as the screen - not the content.
+       FIX THIS if possible in a future version.
 
 \*------------------------------------------------------------------------------------------------*/
 
