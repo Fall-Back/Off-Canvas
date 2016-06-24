@@ -44,6 +44,13 @@ $t: #333;
     $t: $fallback--base-background-color;
 }
 $fallback--off-canvas--bg-color:              $t !default;
+
+// Same thing for the breakpoint:
+$t: 50em;
+@if variable-exists(fallback--breakpoint--enhanced) {
+    $t: $fallback--breakpoint--enhanced;
+}
+$fallback--off-canvas--breakpoint--enhanced: $t !default;
 /*------------------------------------------------------------------------------------------------*/
 
 
@@ -84,11 +91,6 @@ $fallback--off-canvas--spacing:                ($fallback--off-canvas__control--
 $fallback--off-canvas__left-panel--padding:    ($fallback--off-canvas__control--height / 2) !default;
 $fallback--off-canvas__right-panel--padding:   $fallback--off-canvas__left-panel--padding !default;
 
-
-// Breakpoints:
-
-$fallback--off-canvas--breakpoint--enhanced:   50em !default;
-//$fallback--off-canvas--breakpoint--enhanced:  720px !default;
 
 
 // SVG's
